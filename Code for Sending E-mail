@@ -1,0 +1,58 @@
+Algorithm:
+1.	Ensure you have Python installed on the system
+2.	Install Django using pip, the Python package installer:
+        pip install django
+3.	Create a new Django project using the following command:
+        django-admin startproject myproject
+4.	Change into the project directory:
+        cd myproject
+5.	Create a new Django app within your project using the following command:
+        python manage.py startapp myapp
+6.	Configure Email Settings in settings.py: 
+  a.	Configure the email backend in your Django project's settings file (settings.py). 
+          EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+          EMAIL_HOST = 'smtp.yourmailserver.com'
+          EMAIL_PORT = 587
+          EMAIL_USE_TLS = True
+          EMAIL_HOST_USER = ‘email@example.com'
+          EMAIL_HOST_PASSWORD = 'password'
+7.	Create an Email Message: 
+  a.	In your Django app, create a function to construct and send the email message. 
+  b.	Use Django's send_mail function for simple emails or create a custom function for more complex emails. 
+        def send_email(subject, message, recipient_list):
+        send_mail(subject, message, 'from@example.com', recipient_list)
+8.	Use the Function to Send Email: 
+a.	Call the send_email function from the views or other parts of the Django app to send emails.
+9.	Start the Django development server using the following command
+          python manage.py runserver
+10.	Open a web browser and navigate to http://127.0.0.1:8000/ to see your Django project in action.
+
+Coding:
+settings.py
+      EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+      EMAIL_HOST = 'smtp.office365.com'
+      EMAIL_PORT = 587
+      EMAIL_USE_TLS = True
+      EMAIL_HOST_USER = 'your_mail'
+      EMAIL_HOST_PASSWORD = ' your_password'
+
+views.py
+      def send_email(request):
+          send_mail(
+              'Welcome Party - reg.',
+              'Greetings!!! Welcome to the Department of Information Technology.',
+              settings.EMAIL_HOST_USER,
+              ['to_emailID (eg. abc@gmail.com)'],
+              fail_silently=False,
+          )
+          return render(request, 'sendMail.html')
+
+urls.py
+        urlpatterns = [
+            path('send_email/', views.send_email, name='send_email'),
+        ]
+
+
+sendMail.html
+
+    <p> Mail has been sent successfully </p>
