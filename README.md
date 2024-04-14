@@ -1,0 +1,1 @@
+# Configuring-and-Sending-E-mail-using-Django-Framework.
